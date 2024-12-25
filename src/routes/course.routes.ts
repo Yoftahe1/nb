@@ -7,13 +7,13 @@ import {
   updateCourse,
   deleteCourse,
   getCourseById,
-} from "@/controllers/course.controller";
+} from "../controllers/course.controller";
 import {
   fetchUnitValidation,
   fetchCoursesValidation,
-} from "@/middleware/validation/course";
-import handleValidationError from "@/middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../middleware/validation/course";
+import handleValidationError from "../middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

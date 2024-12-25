@@ -8,13 +8,13 @@ import {
   getUnitById,
   completeUnit,
   getCompletedUnits,
-} from "@/controllers/unit.controller";
+} from "../controllers/unit.controller";
 import {
   completeUnitValidation,
   fetchCompletedValidation,
-} from "@/middleware/validation/unit";
-import handleValidationError from "@/middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../middleware/validation/unit";
+import handleValidationError from "../middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

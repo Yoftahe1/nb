@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import userRoutes from '@/routes/user.routes';
-import courseRoutes from '@/routes/course.routes';
+import userRoutes from './user.routes';
+import courseRoutes from './course.routes';
 
-import lessonRoutes from '@/routes/lesson.routes';
-import testRoutes from '@/routes/test.routes';
-import unitRoutes from '@/routes/unit.routes';
+import lessonRoutes from './lesson.routes';
+import testRoutes from './test.routes';
+import unitRoutes from './unit.routes';
 
 const router = Router();
 

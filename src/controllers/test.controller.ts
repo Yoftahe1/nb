@@ -11,7 +11,7 @@ import {
   fetchTestsByUnitId,
   fetchTestsByCourseId,
   fetchTestsByLessonId,
-} from "@/services/test.service";
+} from "../services/test.service";
 
 export const getQuiz = async (req: any, res: Response) => {
   const { id: userId } = req.authUser;

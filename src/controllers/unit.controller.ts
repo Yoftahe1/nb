@@ -8,7 +8,7 @@ import {
   completeUnitById,
   fetchUnitsPaginated,
   fetchCompletedUnits,
-} from "@/services/unit.service";
+} from "../services/unit.service";
 
 export const completeUnit = async (req: any, res: Response) => {
   const { id } = req.params;

@@ -7,13 +7,13 @@ import {
   updateLesson,
   deleteLesson,
   completeLesson,
-} from "@/controllers/lesson.controller";
+} from "../controllers/lesson.controller";
 import {
   getLessonValidation,
   completeLessonValidation,
-} from "@/middleware/validation/lesson";
-import handleValidationError from "@/middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../middleware/validation/lesson";
+import handleValidationError from "../middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 
