@@ -18,7 +18,7 @@ const app: Application = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174","https://nf-z7nw.onrender.com/"], // Allow only your frontend URL
+    origin: ["http://localhost:5173", "http://localhost:5174","https://nf-z7nw.onrender.com"], // Allow only your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
     credentials: true, // Allow credentials (cookies, etc.)
   })
