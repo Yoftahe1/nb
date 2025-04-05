@@ -7,7 +7,7 @@ import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 import express, { Application } from "express";
 
-import routes from "@/routes";
+import routes from "@/routes/index";
 import Bootstrap from "@/bootstrap";
 import { errorHandler } from "@/utils/errotHandler";
 import accessLogStream from "@/utils/access-log-stream";
