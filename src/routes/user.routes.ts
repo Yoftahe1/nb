@@ -10,16 +10,16 @@ import {
   deleteAccount,
   changePassword,
   getLeaderBoard,
-} from "../controllers/user.controller";
+} from "@/controllers/user.controller";
 import {
   loginValidation,
   usersValidation,
   registrationValidation,
   updateProfileValidation,
   changePasswordValidation,
-} from "../middleware/validation/user";
-import handleValidationError from "../middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
+} from "@/middleware/validation/user";
+import handleValidationError from "@/middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

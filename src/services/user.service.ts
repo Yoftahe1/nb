@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { UploadedFile } from "express-fileupload";
 
-import supabase, { supabaseAdmin } from "../config/supabaseClient";
+import supabase, { supabaseAdmin } from "@/config/supabaseClient";
 import { access } from "fs";
 
 interface UserProfile {
@@ -106,7 +106,7 @@ export const fetchToken = async (refreshToken: string) => {
 
   if (error) throw error;
 
-  return data.session!.access_token ;
+  return data.session!.access_token;
 };
 
 export const resetPassword = async (password: string) => {
@@ -174,8 +174,8 @@ export const fetchUsers = async (
   const { data, error, count } = await supabase
     .from("profile")
     .select("*", { count: "exact" })
-    .ilike("first_name", `${first_name}%`)
-    .ilike("last_name", `${last_name}%`)
+    .ilike("first_name", `${first_name || ""}%`)
+    .ilike("last_name", `${last_name || ""}%`)
     .range(from, to);
 
   if (error) throw error;

@@ -1,4 +1,4 @@
-import supabase from "../config/supabaseClient";
+import supabase from "@/config/supabaseClient";
 import { NextFunction, Request, Response } from "express";
 
 export const supabaseAuthMiddleware = async (

@@ -2,21 +2,34 @@ import { Router } from "express";
 
 import {
   addUnit,
-  getUnits,
   deleteUnit,
   updateUnit,
-  getUnitById,
   completeUnit,
   getCompletedUnits,
-} from "../controllers/unit.controller";
+  getUnitsByCourseId,
+  getUnitsByUserAndCourse,
+} from "@/controllers/unit.controller";
 import {
   completeUnitValidation,
   fetchCompletedValidation,
-} from "../middleware/validation/unit";
-import handleValidationError from "../middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
+  fetchUnitsByUserValidation,
+} from "@/middleware/validation/unit";
+import handleValidationError from "@/middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
 
 const router = Router();
+
+router.post("/add", addUnit);
+router.put("/update/:id", updateUnit);
+router.delete("/delete/:id", deleteUnit);
+router.get("/course/:id", getUnitsByCourseId);
+router.get(
+  "/user/course/:id",
+  supabaseAuthMiddleware,
+  fetchUnitsByUserValidation,
+  handleValidationError,
+  getUnitsByUserAndCourse
+);
 
 router.post(
   "/complete/:id",
@@ -32,11 +45,5 @@ router.get(
   handleValidationError,
   getCompletedUnits
 );
-
-router.post("/add", addUnit);
-router.get("/get", getUnits);
-router.get("/get/:id", getUnitById);
-router.put("/update/:id", updateUnit);
-router.delete("/delete/:id", deleteUnit);
 
 export default router;

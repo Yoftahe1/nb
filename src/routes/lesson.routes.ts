@@ -7,15 +7,27 @@ import {
   updateLesson,
   deleteLesson,
   completeLesson,
-} from "../controllers/lesson.controller";
+  getLessonsByUnitId
+} from "@/controllers/lesson.controller";
 import {
   getLessonValidation,
+  fetchLessonsValidation,
   completeLessonValidation,
-} from "../middleware/validation/lesson";
-import handleValidationError from "../middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
+} from "@/middleware/validation/lesson";
+import handleValidationError from "@/middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
 
 const router = Router();
+
+router.get(
+  "/getAll",
+  // supabaseAuthMiddleware,
+  fetchLessonsValidation,
+  handleValidationError,
+  getLessons
+);
+
+router.get("/unit/:id", getLessonsByUnitId);
 
 router.get(
   "/:id/:stepNo",

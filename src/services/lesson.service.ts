@@ -1,4 +1,4 @@
-import supabase from "../config/supabaseClient";
+import supabase from "@/config/supabaseClient";
 
 export const fetchLesson = async (
   lessonId: string,
@@ -19,7 +19,7 @@ export const fetchLesson = async (
   else {
     const { data, error: testError } = await supabase
       .from("tests")
-      .select("choice,difficulty,id,lesson_id,question")
+      .select("choice,difficulty,id,lesson_id,question,type")
       .eq("lesson_id", lessonId)
       .eq("is_quiz", false)
       .range(stepNo - 1, stepNo - 1);
@@ -28,6 +28,27 @@ export const fetchLesson = async (
     else if (data && data.length === 0) return { isEnd: true };
     else return { ...data[0], isTest: true, isEnd: false };
   }
+};
+
+export const fetchLessonsByUnitId = async (page: number, unitId: string) => {
+  const pageSize = 10;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, error, count } = await supabase
+    .from("lessons")
+    .select("id,lesson_no,lesson_title", {
+      count: "exact",
+    })
+    .eq("unit_id", unitId)
+    .order("lesson_no")
+    .range(from, to);
+
+  if (error) throw error;
+
+  const totalPages = Math.ceil(count! / pageSize);
+
+  return { lessons: data, total: count, totalPages };
 };
 
 export const completeLessonById = async (id: string, userId: String) => {
@@ -65,15 +86,33 @@ export const createLesson = async (title: string) => {
   return data;
 };
 
-export const fetchLessonsPaginated = async (start: number, limit: number) => {
-  const { data, error } = await supabase
+export const fetchLessonsPaginated = async (page: number) => {
+  const pageSize = 10;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, error, count } = await supabase
     .from("lessons")
-    .select("*")
-    .range(start, start + limit - 1);
-  if (error) {
-    throw error;
-  }
-  return data;
+    .select(
+      "id,lesson_no,lesson_title ,Course(course_title,course_no) ,units(unit_title,unit_no)",
+      { count: "exact" }
+    )
+    .order("course_no", { foreignTable: "Course" })
+    .order("unit_no", { foreignTable: "units" })
+    .order("lesson_no")
+    .range(from, to);
+
+  if (error) throw error;
+
+  const totalPages = Math.ceil(count! / pageSize);
+
+  const flattenedData = data.map(({ Course, units, ...rest }) => ({
+    ...rest,
+    ...Course,
+    ...units,
+  }));
+
+  return { lessons: flattenedData, total: count, totalPages };
 };
 
 export const updateLessonById = async (id: string, title: string) => {

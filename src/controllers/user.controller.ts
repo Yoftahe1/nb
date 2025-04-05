@@ -11,7 +11,7 @@ import {
   fetchLeaderBoard,
   fetchUserActivities,
   updateUserProfile,
-} from "../services/user.service";
+} from "@/services/user.service";
 
 export const registerUser = async (req: Request, res: Response) => {
   const { email, password, first_name, last_name, phone_number } = req.body;

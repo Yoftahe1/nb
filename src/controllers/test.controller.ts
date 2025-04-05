@@ -9,9 +9,31 @@ import {
   checkAnswerById,
   fetchTestByUserId,
   fetchTestsByUnitId,
+  fetchTestsPaginated,
   fetchTestsByCourseId,
   fetchTestsByLessonId,
-} from "../services/test.service";
+} from "@/services/test.service";
+
+export const getTests = async (req: Request, res: Response) => {
+  const { page } = req.query;
+  try {
+    const Tests = await fetchTestsPaginated(Number(page));
+    res.status(200).json(Tests);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const getTestsByLessonId = async (req: Request, res: Response) => {
+  const { page } = req.query;
+  const { id } = req.params;
+  try {
+    const units = await fetchTestsByLessonId(Number(page), id);
+    res.status(200).json(units);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 export const getQuiz = async (req: any, res: Response) => {
   const { id: userId } = req.authUser;
@@ -45,17 +67,17 @@ export const addTest = async (req: Request, res: Response) => {
   }
 };
 
-export const getTestByLessonId = async (req: Request, res: Response) => {
-  const { lesson_id } = req.params;
-  const { start } = req.query;
-  try {
-    const test = await fetchTestsByLessonId(lesson_id, Number(start));
-    res.status(200).json(test);
-  } catch (error: any) {
-    console.log(error);
-    res.status(400).json({ error: error.message });
-  }
-};
+// export const getTestByLessonId = async (req: Request, res: Response) => {
+//   const { lesson_id } = req.params;
+//   const { start } = req.query;
+//   try {
+//     const test = await fetchTestsByLessonId(lesson_id, Number(start));
+//     res.status(200).json(test);
+//   } catch (error: any) {
+//     console.log(error);
+//     res.status(400).json({ error: error.message });
+//   }
+// };
 
 export const getTestByUnitId = async (req: Request, res: Response) => {
   const { unit_id } = req.params;

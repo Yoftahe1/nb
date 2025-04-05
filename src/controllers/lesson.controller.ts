@@ -7,7 +7,8 @@ import {
   deleteLessonById,
   completeLessonById,
   fetchLessonsPaginated,
-} from "../services/lesson.service";
+  fetchLessonsByUnitId,
+} from "@/services/lesson.service";
 
 export const getLesson = async (req: any, res: Response) => {
   const { id, stepNo } = req.params;
@@ -15,6 +16,17 @@ export const getLesson = async (req: any, res: Response) => {
   try {
     const lesson = await fetchLesson(id, Number(stepNo), userId);
     res.status(200).json(lesson);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const getLessonsByUnitId = async (req: Request, res: Response) => {
+  const { page } = req.query;
+  const { id } = req.params;
+  try {
+    const lessons = await fetchLessonsByUnitId(Number(page), id);
+    res.status(200).json(lessons);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
@@ -42,9 +54,9 @@ export const addLesson = async (req: Request, res: Response) => {
 };
 
 export const getLessons = async (req: Request, res: Response) => {
-  const { start, limit } = req.query;
+  const { page } = req.query;
   try {
-    const Lessons = await fetchLessonsPaginated(Number(start), Number(limit));
+    const Lessons = await fetchLessonsPaginated(Number(page));
     res.status(200).json(Lessons);
   } catch (error: any) {
     res.status(400).json({ error: error.message });

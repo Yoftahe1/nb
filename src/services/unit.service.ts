@@ -1,7 +1,88 @@
-import supabase from "../config/supabaseClient";
-import sendMessage from "../config/telegramClient";
+import supabase from "@/config/supabaseClient";
+import sendMessage from "@/config/telegramClient";
 
-export const completeUnitById = async (unitId: string, userId: string,email:string) => {
+export const createUnit = async (unit_title: string, course_id: string) => {
+  const { count: unit_no, error: countError } = await supabase
+    .from("units")
+    .select("*", { count: "exact", head: true })
+    .eq("course_id", course_id);
+
+  if (countError) throw countError;
+
+  const { error, data } = await supabase.from("units").insert({
+    unit_no: unit_no ? unit_no + 1 : 1,
+    unit_title,
+    course_id,
+  });
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const updateUnitById = async (
+  id: string,
+  unit_title: string,
+  unit_no: number
+) => {
+  const { error, data } = await supabase
+    .from("units")
+    .update({ unit_no, unit_title })
+    .eq("id", id);
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const deleteUnitById = async (id: string) => {
+  const { error } = await supabase.from("units").delete().eq("id", id);
+
+  if (error) throw error;
+
+  return;
+};
+
+export const fetchUnitsByCourseId = async (page: number, courseId: string) => {
+  const pageSize = 10;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, error, count } = await supabase
+    .from("units")
+    .select("id,unit_no,unit_title", {
+      count: "exact",
+    })
+    .eq("course_id", courseId)
+    .order("unit_no")
+    .range(from, to);
+
+  if (error) throw error;
+
+  const totalPages = Math.ceil(count! / pageSize);
+
+  return { units: data, total: count, totalPages };
+};
+
+export const fetchUnitsByUserAndCourse = async (
+  courseId: string,
+  userId: string
+) => {
+  const { data, error } = await supabase.rpc("fetch_units", {
+    course_id_input: courseId,
+    user_id_input: userId,
+  });
+
+  if (error) return null;
+
+  return data;
+};
+
+export const completeUnitById = async (
+  unitId: string,
+  userId: string,
+  email: string
+) => {
   const { data: lessons, error } = await supabase
     .from("lessons")
     .select(
@@ -112,53 +193,5 @@ export const fetchCompletedUnits = async (page: number) => {
 
   const totalPages = Math.ceil(count! / pageSize);
 
-  return { units: processedData, total: count, totalPages };
-};
-
-export const createUnit = async (title: string) => {
-  const { error, data } = await supabase.from("Unit").insert({
-    title,
-  });
-  if (error) {
-    throw error;
-  }
-  return data;
-};
-
-export const fetchUnitsPaginated = async (start: number, limit: number) => {
-  const { data, error } = await supabase
-    .from("Unit")
-    .select("*")
-    .range(start, start + limit - 1);
-  if (error) {
-    throw error;
-  }
-  return data;
-};
-
-export const fetchUnitById = async (id: string) => {
-  const { data, error } = await supabase.from("Unit").select("*").eq("id", id);
-  if (error) {
-    throw error;
-  }
-  return data;
-};
-
-export const updateUnitById = async (id: string, title: string) => {
-  const { error, data } = await supabase
-    .from("Unit")
-    .update({ title })
-    .eq("id", id);
-  if (error) {
-    throw error;
-  }
-  return data;
-};
-
-export const deleteUnitById = async (id: string) => {
-  const { error } = await supabase.from("Unit").delete().eq("id", id);
-  if (error) {
-    throw error;
-  }
-  return;
+  return { requests: processedData, total: count, totalPages };
 };
