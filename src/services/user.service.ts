@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { UploadedFile } from "express-fileupload";
 
-import supabase, { supabaseAdmin } from "@/config/supabaseClient";
-import { access } from "fs";
+import supabase,{supabaseAdmin} from "../config/supabaseClient";
 
 interface UserProfile {
   address?: string;

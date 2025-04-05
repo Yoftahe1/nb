@@ -5,8 +5,8 @@ import {
   leaderBoard,
   deleteProfile,
   updateProfile,
-} from "@/controllers/profile.controller";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../controllers/profile.controller";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

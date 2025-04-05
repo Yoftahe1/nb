@@ -8,7 +8,7 @@ import {
   completeLessonById,
   fetchLessonsPaginated,
   fetchLessonsByUnitId,
-} from "@/services/lesson.service";
+} from "../services/lesson.service";
 
 export const getLesson = async (req: any, res: Response) => {
   const { id, stepNo } = req.params;

@@ -1,5 +1,5 @@
-import supabase from "@/config/supabaseClient";
-import sendMessage from "@/config/telegramClient";
+import supabase from "../config/supabaseClient";
+import sendMessage from "../config/telegramClient";
 
 export const createUnit = async (unit_title: string, course_id: string) => {
   const { count: unit_no, error: countError } = await supabase

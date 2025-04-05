@@ -8,7 +8,7 @@ import {
   fetchCompletedUnits,
   fetchUnitsByCourseId,
   fetchUnitsByUserAndCourse,
-} from "@/services/unit.service";
+} from "../services/unit.service";
 
 export const addUnit = async (req: Request, res: Response) => {
   const { unit_title, course_id } = req.body;

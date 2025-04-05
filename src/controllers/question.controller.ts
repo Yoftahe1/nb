@@ -7,7 +7,7 @@ import {
   createQuestion,
   deleteQuestionById,
   fetchQuestionsByLessonId,
-} from "@/services/question.service";
+} from "../services/question.service";
 
 export const addQuestion = async (req: Request, res: Response) => {
   const {

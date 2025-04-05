@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import supabase from "@/config/supabaseClient";
+import supabase from "../config/supabaseClient";
 import { UploadedFile } from "express-fileupload";
 
 export const createCourse = async (

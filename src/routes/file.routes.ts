@@ -9,8 +9,8 @@ import {
   completeLesson,
   getLessonByUser,
   getLessonsByUnitId,
-} from "@/controllers/files.controller";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../controllers/files.controller";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

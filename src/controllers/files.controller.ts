@@ -10,7 +10,7 @@ import {
   fetchLessonByUser,
   completeLessonById,
   fetchLessonsByUnitId,
-} from "@/services/files.service";
+} from "../services/files.service";
 
 export const getFiles = async (req: Request, res: Response) => {
   const { fileName } = req.body;

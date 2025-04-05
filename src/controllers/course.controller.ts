@@ -7,7 +7,7 @@ import {
   fetchCourseById,
   deleteCourseById,
   updateCourseById,
-} from "@/services/course.service";
+} from "../services/course.service";
 
 export const addCourse = async (req: Request, res: Response) => {
   const { course_title } = req.body;

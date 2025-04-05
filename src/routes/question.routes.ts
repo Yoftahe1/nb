@@ -6,8 +6,8 @@ import {
   deleteQuestion,
   checkAnswer,
   getQuiz
-} from "@/controllers/question.controller";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../controllers/question.controller";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

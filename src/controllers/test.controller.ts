@@ -12,7 +12,7 @@ import {
   fetchTestsPaginated,
   fetchTestsByCourseId,
   fetchTestsByLessonId,
-} from "@/services/test.service";
+} from "../services/test.service";
 
 export const getTests = async (req: Request, res: Response) => {
   const { page } = req.query;

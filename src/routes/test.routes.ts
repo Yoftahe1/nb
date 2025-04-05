@@ -13,13 +13,13 @@ import {
   getTestByCourseId,
   // getTestByLessonId,
   getTestsByLessonId,
-} from "@/controllers/test.controller";
+} from "../controllers/test.controller";
 import {
   checkAnswerValidation,
   TestByLessonIdValidation,
-} from "@/middleware/validation/test";
-import handleValidationError from "@/middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../middleware/validation/test";
+import handleValidationError from "../middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

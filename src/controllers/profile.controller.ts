@@ -5,7 +5,7 @@ import {
   updateUserProfile,
   deleteUserProfile,
   getLeaderBoard,
-} from "@/services/profile.service";
+} from "../services/profile.service";
 import fileUpload, { FileArray, UploadedFile } from "express-fileupload";
 
 export const addProfile = async (req: Request, res: Response) => {

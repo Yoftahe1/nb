@@ -1,4 +1,4 @@
-import supabase from "@/config/supabaseClient";
+import supabase from "../config/supabaseClient";
 
 interface Test {
   question: string;

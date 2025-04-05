@@ -8,14 +8,14 @@ import {
   deleteLesson,
   completeLesson,
   getLessonsByUnitId
-} from "@/controllers/lesson.controller";
+} from "../controllers/lesson.controller";
 import {
   getLessonValidation,
   fetchLessonsValidation,
   completeLessonValidation,
-} from "@/middleware/validation/lesson";
-import handleValidationError from "@/middleware/validation/handel-error";
-import { supabaseAuthMiddleware } from "@/middleware/supabaseAuthMiddleware";
+} from "../middleware/validation/lesson";
+import handleValidationError from "../middleware/validation/handel-error";
+import { supabaseAuthMiddleware } from "../middleware/supabaseAuthMiddleware";
 
 const router = Router();
 

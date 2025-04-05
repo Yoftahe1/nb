@@ -1,5 +1,5 @@
-import supabase from "@/config/supabaseClient";
-import fileUpload, { FileArray, UploadedFile } from "express-fileupload";
+import supabase from "../config/supabaseClient";
+import {  UploadedFile } from "express-fileupload";
 import { v4 as uuidv4 } from "uuid";
 
 interface UserProfile {
